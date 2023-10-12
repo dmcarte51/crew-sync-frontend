@@ -1,0 +1,27 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+.days {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: none;
+}
+.day {
+    border: black 1px solid;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 120px;
+    padding: 0;
+}
