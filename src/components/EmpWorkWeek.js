@@ -15,7 +15,11 @@ function EmpWorkWeek( { empData } ) {
           <div className="times">
             {employee.startTimes.map((start, index) => (
               <div key={index} className="from">
+              {start !== 'Off' && employee.endTimes[index] !== 'Off' ? (
                 <div className="time-to-from">{start} - {employee.endTimes[index]}</div>
+              ) : (
+                <div className="time-to-from">OFF</div>
+              )}
                 {/* You can add more content for each day here */}
               </div>
             ))}

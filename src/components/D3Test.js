@@ -26,7 +26,7 @@ function D3Test( { empData } ) {
             for (let i = 0; i < employee.startTimes.length; i++) {
               if (employee.startTimes[0] !== 'Off' && employee.endTimes[0] !== 'Off') {
                 dataForEmployee.push({
-                  task: employee[i].name,
+                  task: employee.name,
                   start: new Date(`2023-10-01T${employee.startTimes[0]}:00`),
                   end: new Date(`2023-10-01T${employee.endTimes[0]}:00`),
                 });

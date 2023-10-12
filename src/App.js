@@ -1,10 +1,8 @@
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import D3Test from './components/D3Test';
 import background from './CrewSync.svg';
 import Calendar from './components/Calendar';
-import React, { useEffect } from 'react';
 
 function App() {
   // Your employee data
@@ -20,6 +18,8 @@ function App() {
     { name: 'Ronnie', startTimes: ['8:00', '10:00', '10:00', '8:00', '12:00', '10:00', '8:00'], endTimes: ['16:00', '14:00', '16:00', '14:00', '18:00', '14:00', '10:00'] }
   ];
 
+  const dates = ['', '10/2/2023', '10/3/2023', '10/4/2023', '10/5/2023', '10/6/2023', '10/7/2023', '10/8/2023']
+
   return (
     <BrowserRouter>
       <div
@@ -34,7 +34,7 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="/" element={<Calendar empData={empData} />} />
+          <Route path="/" element={<Calendar empData={empData} dates={dates} />} />
           <Route path="/d3" element={<D3Test empData={empData} />} />
         </Routes>
       </div>
