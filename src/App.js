@@ -4,6 +4,7 @@ import D3Test from './components/D3Test';
 import background from './CrewSync.svg';
 import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
+import Landing from './components/Landing';
 
 function App() {
   // Your employee data
@@ -39,7 +40,8 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="/" element={<Calendar empData={empData} dates={dates} />} />
+          <Route path="/" element={<Landing empData={empData} dates={dates} />} />
+          <Route path="/cal" element={<Calendar empData={empData} dates={dates} />} />
           <Route path="/d3" element={<D3Test empData={empData} />} />
           {empData.map((employee) => (
             <Route key={employee.name} path={`d3/${employee.name}`} element={<D3Emp empData={findByName(employee.name)} />} />
