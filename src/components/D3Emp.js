@@ -1,39 +1,26 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-function D3Test( { empData } ) {
+function D3Emp( { empData } ) {
   const chartRef = useRef();
 
-  useEffect(() => {
-        // Sample data
-        // const data = [
-        //     // 15 fake tasks
-        //     { task: 'David', start: new Date('2023-10-01T08:00:00'), end: new Date('2023-10-01T12:00:00') },
-        //     { task: 'Dillon', start: new Date('2023-10-01T14:00:00'), end: new Date('2023-10-01T16:00:00') },
-        //     { task: 'Kade', start: new Date('2023-10-01T17:00:00'), end: new Date('2023-10-01T19:00:00') },
-        //     { task: 'Jeremy', start: new Date('2023-10-01T08:00:00'), end: new Date('2023-10-01T14:00:00') },
-        //     { task: 'Noah', start: new Date('2023-10-01T17:00:00'), end: new Date('2023-10-01T20:00:00') },
-        //     { task: 'Dustin', start: new Date('2023-10-01T12:00:00'), end: new Date('2023-10-01T20:00:00') },
-        //     { task: 'Connor', start: new Date('2023-10-01T12:00:00'), end: new Date('2023-10-01T16:00:00') },
-        //     { task: 'Mcgregor', start: new Date('2023-10-01T12:00:00'), end: new Date('2023-10-01T14:00:00') },
-        //     { task: 'Nate', start: new Date('2023-10-01T08:00:00'), end: new Date('2023-10-01T14:00:00') },
-        //     { task: 'Diaz', start: new Date('2023-10-01T10:00:00'), end: new Date('2023-10-01T12:00:00') },
-        //     { task: 'Three', start: new Date('2023-10-01T17:00:00'), end: new Date('2023-10-01T19:00:00') },
-        //     // Add more tasks as needed
-        // ];
-        const data = empData.flatMap(employee => {
-            const dataForEmployee = [];
-            for (let i = 0; i < employee.startTimes.length; i++) {
-              if (employee.startTimes[i] !== 'Off' && employee.endTimes[i] !== 'Off') {
-                dataForEmployee.push({
-                  task: employee.name,
-                  start: new Date(`2023-10-01T${employee.startTimes[i]}:00`),
-                  end: new Date(`2023-10-01T${employee.endTimes[i]}:00`),
-                });
-              }
-            }
-            return dataForEmployee;
-          });
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+useEffect(() => {
+
+    const data = [];
+    for (let i = 0; i < empData.startTimes.length; i++) {
+        const startTime = new Date(`2023-10-01T${empData.startTimes[i]}:00`);
+        const endTime = new Date(`2023-10-01T${empData.endTimes[i]}:00`);
+        const dayOfWeek = days[i]; // Get the day of the week
+
+        data.push({
+            task: dayOfWeek,
+            start: startTime,
+            end: endTime,
+        });
+    }
+    
+
 
 
         // Define chart dimensions and margins
@@ -50,8 +37,11 @@ function D3Test( { empData } ) {
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
         // Define scales for x and y axes
+        const minTime = new Date('2023-10-01T06:00:00'); // Replace with your desired minimum time
+        const maxTime = new Date('2023-10-01T20:00:00'); // Replace with your desired maximum time
+        
         const xScale = d3.scaleTime()
-            .domain([d3.min(data, d => d.start), d3.max(data, d => d.end)])
+            .domain([minTime, maxTime])
             .range([0, width]);
 
         const yScale = d3.scaleBand()
@@ -110,4 +100,4 @@ function D3Test( { empData } ) {
   return <svg ref={chartRef}></svg>;
 }
 
-export default D3Test;
+export default D3Emp;
