@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-function D3Test( { empData } ) {
+function D3Test( { empData, index } ) {
   const chartRef = useRef();
 
   useEffect(() => {
@@ -24,11 +24,11 @@ function D3Test( { empData } ) {
         const data = empData.flatMap(employee => {
             const dataForEmployee = [];
             for (let i = 0; i < employee.startTimes.length; i++) {
-              if (employee.startTimes[i] !== 'Off' && employee.endTimes[i] !== 'Off') {
+              if (employee.startTimes[index] !== 'Off' && employee.endTimes[index] !== 'Off') {
                 dataForEmployee.push({
                   task: employee.name,
-                  start: new Date(`2023-10-01T${employee.startTimes[i]}:00`),
-                  end: new Date(`2023-10-01T${employee.endTimes[i]}:00`),
+                  start: new Date(`2023-10-01T${employee.startTimes[index]}:00`),
+                  end: new Date(`2023-10-01T${employee.endTimes[index]}:00`),
                 });
               }
             }
