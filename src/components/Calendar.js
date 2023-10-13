@@ -9,7 +9,7 @@ function Calendar( { empData, dates } ) {
     <div className="calendar">
       <div className="days">
         {daysOfWeek.map((day, index) => (
-          <a key={index} className="day" href="/d3" empData={empData} >
+          <a key={index} className="day" href={`d3/${day}`} empData={empData} >
             <div className="day-name">{day}</div>
             <div className="day-date">{dates[index]}</div>
             {/* You can add more content for each day here */}

@@ -4,6 +4,7 @@ import D3Test from './components/D3Test';
 import background from './CrewSync.svg';
 import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
+import Landing from './components/Landing';
 
 function App() {
   // Your employee data
@@ -24,7 +25,10 @@ function App() {
   }
 
   const dates = ['', '10/2/2023', '10/3/2023', '10/4/2023', '10/5/2023', '10/6/2023', '10/7/2023', '10/8/2023']
+  // RANDOM WHITESPACE AT INDEX 1 IS NECESSARY
+  // FOR THE CALENDAR TO DISPLAY CORRECTLY
 
+  const dayOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   return (
     <BrowserRouter>
       <div
@@ -39,8 +43,11 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="/" element={<Calendar empData={empData} dates={dates} />} />
-          <Route path="/d3" element={<D3Test empData={empData} />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/cal" element={<Calendar empData={empData} dates={dates} />} />
+          {dayOfWeek.map((day, index) => (
+            <Route key={index} path={`d3/${day}`} element={<D3Test empData={empData} index={index} />} />
+          ))}
           {empData.map((employee) => (
             <Route key={employee.name} path={`d3/${employee.name}`} element={<D3Emp empData={findByName(employee.name)} />} />
           ))}
