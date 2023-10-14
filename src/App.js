@@ -5,6 +5,7 @@ import background from './CrewSync.svg';
 import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
 import Landing from './components/Landing';
+import Layout from './components/Layout';
 import NavBar from './components/NavBarr';
 
 function App() {
@@ -44,8 +45,22 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/cal" element={<Calendar empData={empData} dates={dates} />} />
+          <Route
+            path="/"
+            element={
+              <Layout> {/* Wrap the content of each route with the Layout component */}
+                <Landing />
+              </Layout>
+            }
+          />
+          <Route
+            path="/cal"
+            element={
+              <Layout>
+                <Calendar empData={empData} dates={dates} />
+              </Layout>
+            }
+          />
           {dayOfWeek.map((day, index) => (
             <Route key={index} path={`d3/${day}`} element={<D3Test empData={empData} index={index} />} />
           ))}
