@@ -5,7 +5,7 @@ function Landing() {
 
   return (
     <div className="landing">
-        Nothing Yet
+        Nothing Yet git push test
     </div>
   );
 };
