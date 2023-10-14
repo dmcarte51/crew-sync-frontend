@@ -7,11 +7,15 @@
 
 }
 
-.menu-bars{
-    margin-left: 2rem;
+.menu-bars {
+    margin-left: 0; /* Remove the margin to align with the far left */
     font-size: 2rem;
     background: none;
+    position: absolute; /* Change the position to absolute */
+    top: 0; /* Align it with the top of its container */
+    left: 0; /* Align it with the far left of its container */
 }
+
 
 .nav-menu{
     background-color: rgb(234, 172, 4);
