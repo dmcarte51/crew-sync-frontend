@@ -5,6 +5,7 @@ import background from './CrewSync.svg';
 import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
 import Landing from './components/Landing';
+import NavBar from './components/NavBarr';
 
 function App() {
   // Your employee data
@@ -14,8 +15,8 @@ function App() {
     { name: 'Paul', emp_id: 7, startTimes: ['10:00', '08:00', '08:00', '10:00', '10:00', '08:00', '10:00'], endTimes: ['16:00', '16:00', '14:00', '14:00', '16:00', '14:00', '16:00'] },
     { name: 'George', emp_id: 8, startTimes: ['12:00', '08:00', '08:00', '12:00', '10:00', '12:00', '10:00'], endTimes: ['18:00', '14:00', '14:00', '18:00', '14:00', '18:00', '14:00'] },
     { name: 'Ringo', emp_id: 9, startTimes: ['10:00', '08:00', '12:00', '08:00', '10:00', '08:00', '10:00'], endTimes: ['14:00', '16:00', '18:00', '14:00', '16:00', '14:00', '16:00'] },
-    { name: 'Mick', emp_id: 10, startTimes: ['08:00', '10:00', '08:00', '12:00', '8:00', '10:00', '12:00'], endTimes: ['16:00', '14:00', '16:00', '18:00', '14:00', '16:00', '18:00'] },
-    { name: 'Keith', emp_id: 11, startTimes: ['08:00', '12:00', '10:00', '8:00', '10:00', '10:00', '08:00'], endTimes: ['16:00', '18:00', '14:00', '16:00', '14:00', '14:00', '10:00'] },
+    { name: 'Mick', emp_id: 10, startTimes: ['08:00', '10:00', '08:00', '12:00', '08:00', '10:00', '12:00'], endTimes: ['16:00', '14:00', '16:00', '18:00', '14:00', '16:00', '18:00'] },
+    { name: 'Keith', emp_id: 11, startTimes: ['08:00', '12:00', '10:00', '08:00', '10:00', '10:00', '08:00'], endTimes: ['16:00', '18:00', '14:00', '16:00', '14:00', '14:00', '10:00'] },
     { name: 'Charlie', emp_id: 12, startTimes: ['08:00', '08:00', '12:00', '10:00', '08:00', '12:00', '10:00'], endTimes: ['16:00', '14:00', '18:00', '14:00', '16:00', '18:00', '14:00'] },
     { name: 'Ronnie', emp_id: 13, startTimes: ['08:00', '10:00', '10:00', '08:00', '12:00', '10:00', '08:00'], endTimes: ['16:00', '14:00', '16:00', '14:00', '18:00', '14:00', '10:00'] }
   ];
@@ -51,6 +52,7 @@ function App() {
           {empData.map((employee) => (
             <Route key={employee.name} path={`d3/${employee.name}`} element={<D3Emp empData={findByName(employee.name)} />} />
           ))}
+          <Route path="/nav" element={<NavBar />} />
         </Routes>
       </div>
     </BrowserRouter>
