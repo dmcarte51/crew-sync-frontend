@@ -12,7 +12,7 @@ export const NavBarrData = [
     },
     {
         title: "Calendar",
-        path: "/",
+        path: "/cal",
         icon: <AiIcons.AiFillCalendar />,
         cName: "nav-text",
     },
