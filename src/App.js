@@ -7,6 +7,7 @@ import D3Emp from './components/D3Emp';
 import Landing from './components/Landing';
 import Layout from './components/Layout';
 import NavBar from './components/NavBarr';
+import Register from "./components/Register";
 
 function App() {
   // Your employee data
@@ -50,6 +51,14 @@ function App() {
             element={
               <Layout> {/* Wrap the content of each route with the Layout component */}
                 <Landing />
+              </Layout>
+            }
+          />
+            <Route
+            path="/reg"
+            element={
+              <Layout> {/* Wrap the content of each route with the Layout component */}
+                <Register />
               </Layout>
             }
           />
