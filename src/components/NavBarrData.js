@@ -16,5 +16,10 @@ export const NavBarrData = [
         icon: <AiIcons.AiFillCalendar />,
         cName: "nav-text",
     },
-    
+        {
+        title: "Register",
+        path: "/reg",
+        icon: <AiIcons.AiFillAlert />,
+        cName: "nav-text",
+    },
 ]
