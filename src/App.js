@@ -6,11 +6,7 @@ import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
 import Landing from './components/Landing';
 import Layout from './components/Layout';
-<<<<<<< HEAD
-=======
-import NavBar from './components/NavBarr';
-import Register from "./components/Register";
->>>>>>> f2ab1faac3dfddfb5a42e61b9d570411efb38652
+import Register from './components/Register';
 
 function App() {
   // Your employee data
