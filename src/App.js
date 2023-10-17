@@ -6,7 +6,6 @@ import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
 import Landing from './components/Landing';
 import Layout from './components/Layout';
-import NavBar from './components/NavBarr';
 
 function App() {
   // Your employee data
@@ -67,7 +66,6 @@ function App() {
           {empData.map((employee) => (
             <Route key={employee.name} path={`d3/${employee.name}`} element={<D3Emp empData={findByName(employee.name)} />} />
           ))}
-          <Route path="/nav" element={<NavBar />} />
         </Routes>
       </div>
     </BrowserRouter>

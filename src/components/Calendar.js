@@ -1,4 +1,4 @@
-import "./Calendar.css";
+import "./styles/Calendar.css";
 import EmpWorkWeek from "./EmpWorkWeek";
 
 function Calendar( { empData, dates } ) {
