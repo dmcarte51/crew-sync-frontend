@@ -1,10 +1,10 @@
-import "./styles/Register.css";
-import React, { useState } from 'react';
+import './styles/Login.css'
+import { useState } from 'react';
 
-function RegistrationForm() {
+
+function Login() {
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
         password: ''
     });
 
@@ -24,8 +24,8 @@ function RegistrationForm() {
 
     return (
         <div>
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit} className="register-form">
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input
@@ -33,17 +33,6 @@ function RegistrationForm() {
                         id="username"
                         name="username"
                         value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
                         onChange={handleChange}
                         required
                     />
@@ -59,10 +48,10 @@ function RegistrationForm() {
                         required
                     />
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit">Login</button>
             </form>
         </div>
     );
 }
 
-export default RegistrationForm;
+export default Login;
