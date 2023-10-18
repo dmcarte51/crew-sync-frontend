@@ -9,19 +9,17 @@ function LoginComponent({ onDataExport, registeredUsers }) {
     email: ''
   });
     const [error, setError] = useState('');
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
   
     const handleLogin = () => {
-      const user = authenticateUser(username, password);
   
       if (user.username === registeredUsers.username && user.password === registeredUsers.password) {
-        onDataExport();
+        onDataExport(user, true);
         // Handle successful login (e.g., set a session token, navigate to the authenticated part of your app)
       } else {
         setError('Invalid username or password');
       }
     };
-    
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setUser((prevUser) => ({

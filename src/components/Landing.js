@@ -20,11 +20,11 @@ export default function Form() {
     });
 
     // function is passed to register component to set the user 
-    const handleRegisterComponentData = (user, isAuthenticated) => {
+    const handleRegisterComponentData = (user) => {
         setRegisteredUsers(user);
     }
 
-    const handleLoginComponentData = (verifiedUser) => {
+    const handleLoginComponentData = (verifiedUser, isAuthenticated) => {
         setVerifiedUser(verifiedUser);
     }
 
