@@ -1,7 +1,7 @@
 import "./styles/Register.css";
 import React, { useState } from 'react';
 
-function RegistrationForm() {
+function RegistrationForm({ onDataExport }) {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -15,17 +15,22 @@ function RegistrationForm() {
             [name]: value
         }));
     };
+    const handleExportData = (data) => {
+        // Call the callback function with the data to send it to App.js
+        onDataExport(data);
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Send formData to server or handle it accordingly
+        handleExportData(formData);
         console.log('User data submitted:', formData);
     };
 
     return (
         <div>
             <h2>Register</h2>
-            <form onSubmit={handleSubmit} className="register-form">
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input
@@ -59,7 +64,7 @@ function RegistrationForm() {
                         required
                     />
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit" onSubmit={handleSubmit}>Register</button>
             </form>
         </div>
     );
