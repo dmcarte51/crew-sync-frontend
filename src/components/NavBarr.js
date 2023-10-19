@@ -3,7 +3,7 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { NavBarrData } from "./NavBarrData";
-import './NavBarr.css';
+import './styles/NavBarr.css';
 import { IconContext } from "react-icons";
 
 

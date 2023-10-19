@@ -1,5 +1,5 @@
 import React from 'react';
-import './EmpWorkWeek.css';
+import './styles/EmpWorkWeek.css'
 
 function EmpWorkWeek( { empData } ) {
   // 10 employee objects

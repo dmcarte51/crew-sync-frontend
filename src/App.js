@@ -6,7 +6,8 @@ import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
 import Landing from './components/Landing';
 import Layout from './components/Layout';
-import NavBar from './components/NavBarr';
+import Register from './components/Register';
+import Login from './components/Login';
 
 function App() {
   // Your employee data
@@ -53,6 +54,22 @@ function App() {
               </Layout>
             }
           />
+            <Route
+            path="/reg"
+            element={
+              <Layout> {/* Wrap the content of each route with the Layout component */}
+                <Register />s
+              </Layout>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Layout>
+                <Login />
+              </Layout>
+            }
+          />
           <Route
             path="/cal"
             element={
@@ -67,7 +84,6 @@ function App() {
           {empData.map((employee) => (
             <Route key={employee.name} path={`d3/${employee.name}`} element={<D3Emp empData={findByName(employee.name)} />} />
           ))}
-          <Route path="/nav" element={<NavBar />} />
         </Routes>
       </div>
     </BrowserRouter>
