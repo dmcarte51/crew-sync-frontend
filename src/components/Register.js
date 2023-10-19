@@ -8,39 +8,45 @@ function Register() {
     email: '',
     password: ''
   });
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
+    if (name === "confirmPassword") {
+      setConfirmPassword(value);
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      // Send a POST request to your server to create the user
-      const response = await axios.post('http://localhost:8080/api/v1/users', JSON.stringify(formData), {
-        headers: {
+    if (formData.password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    } else {
+      try {
+        // Send a POST request to your server to create the user
+        const response = await axios.post('http://localhost:8080/api/v1/users', JSON.stringify(formData), {
+          headers: {
             'Content-Type': 'application/json'
-        }
+          }
         });
 
-      if (response.status === 201) {
-        setSuccessMessage(response.data);
-        setFormData({ username: '', email: '', password: '' }); // Clear form data
-      } else {
-        setError(response.data);
+        if (response.status === 201) {
+          setSuccessMessage(response.data);
+          setFormData({ username: '', email: '', password: '' }); // Clear form data
+        } else {
+          setError(response.data);
+        }
+      } catch (error) {
+        setError('An error occurred. Please try again.');
       }
-    } catch (error) {
-      setError('An error occurred. Please try again.');
     }
   };
 
@@ -69,6 +75,13 @@ function Register() {
           value={formData.password}
           onChange={handleChange}
         />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          name="confirmPassword"
+          value={confirmPassword} // Use confirmPassword state
+          onChange={handleChange} // Use the handleChange function
+        />
 
         <button type="submit">Register</button>
       </form>
@@ -77,6 +90,5 @@ function Register() {
     </div>
   );
 }
-
 
 export default Register;
