@@ -1,7 +1,7 @@
 import './styles/Login.css'
 import React, { useState } from 'react';
 
-function Login({ onDataExport, registeredUser }) {
+function Login({ onDataExport }) {
   const [user, setUser] = useState({
     username: '',
     password: ''

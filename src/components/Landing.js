@@ -6,11 +6,7 @@ import Login from './Login';
  
 function Landing() {
     // sets test user (for development use only), register component will set this to the user that is registered
-    const [registeredUser, setRegisteredUser] = useState({
-        username: '',
-        password: '',
-        email: ''
-      });
+
 
     const [verifiedUser, setVerifiedUser] = useState({
         username: '',
@@ -39,7 +35,7 @@ function Landing() {
             <h1>Welcome to Our App</h1>
             <p>Please log in or sign up to continue.</p>
             <div>
-              <Login onDataExport={handleLoginComponentData} registeredUser={registeredUser} />
+              <Login onDataExport={handleLoginComponentData} />
               <Register />
             </div>
           </div>
