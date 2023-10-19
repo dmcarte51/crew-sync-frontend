@@ -4,9 +4,9 @@ import Dashboard from './Dashboard';
 import Register from './Register';
 import Login from './Login';
  
-export default function Form() {
+function Landing() {
     // sets test user (for development use only), register component will set this to the user that is registered
-    const [registeredUsers, setRegisteredUsers] = useState({
+    const [registeredUser, setRegisteredUser] = useState({
         username: '',
         password: '',
         email: ''
@@ -20,11 +20,8 @@ export default function Form() {
     });
 
     // function is passed to register component to set the user 
-    const handleRegisterComponentData = (user) => {
-        setRegisteredUsers(user);
-    }
 
-    const handleLoginComponentData = (verifiedUser, isAuthenticated) => {
+    const handleLoginComponentData = (verifiedUser) => {
         setVerifiedUser(verifiedUser);
     }
 
@@ -42,11 +39,13 @@ export default function Form() {
             <h1>Welcome to Our App</h1>
             <p>Please log in or sign up to continue.</p>
             <div>
-              <Login onDataExport={handleLoginComponentData} registeredUser={registeredUsers} />
-              <Register onDataExport={handleRegisterComponentData} />
+              <Login onDataExport={handleLoginComponentData} registeredUser={registeredUser} />
+              <Register />
             </div>
           </div>
         )}
       </div>
     );
 }
+
+export default Landing;

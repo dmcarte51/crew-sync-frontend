@@ -1,36 +1,39 @@
 import './styles/Login.css'
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-
-function LoginComponent({ onDataExport, registeredUsers }) {
+function Login({ onDataExport, registeredUser }) {
   const [user, setUser] = useState({
     username: '',
-    password: '',
-    email: ''
+    password: ''
   });
-    const [error, setError] = useState('');
-  
-    const handleLogin = () => {
-  
-      if (user.username === registeredUsers.username && user.password === registeredUsers.password) {
-        onDataExport(user, true);
-        // Handle successful login (e.g., set a session token, navigate to the authenticated part of your app)
-      } else {
-        setError('Invalid username or password');
-      }
-    };
+  const [error, setError] = useState('');
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setUser((prevUser) => ({
-        ...prevUser,
-        [name]: value
-      }));
-    };
+  const handleLogin = () => {
+    if (!registeredUser) {
+      setError('No registered user found');
+      return; // Exit the function to prevent further execution
+    }
   
-    return (
-      <div>
-        <h1>Login</h1>
+    if (user.username === registeredUser.username && user.password === registeredUser.password) {
+      onDataExport(registeredUser, true);
+      // Handle successful login (e.g., set a session token, navigate to the authenticated part of your app)
+    } else {
+      setError('Invalid username or password');
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value
+    }));
+  };
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <form>
         <input
           type="text"
           placeholder="Username"
@@ -45,10 +48,13 @@ function LoginComponent({ onDataExport, registeredUsers }) {
           value={user.password}
           onChange={handleChange}
         />
-        <button onClick={handleLogin}>Login</button>
-        {error && <p>{error}</p>}
-      </div>
-    );
-  }
-  
-  export default LoginComponent;
+        <button type="button" onClick={handleLogin}>
+          Login
+        </button>
+      </form>
+      {error && <p>{error}</p>}
+    </div>
+  );
+}
+
+export default Login;

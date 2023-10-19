@@ -58,7 +58,7 @@ function App() {
             path="/reg"
             element={
               <Layout> {/* Wrap the content of each route with the Layout component */}
-                <Register />
+                <Register />s
               </Layout>
             }
           />
