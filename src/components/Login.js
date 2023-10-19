@@ -9,17 +9,7 @@ function Login({ onDataExport }) {
   const [error, setError] = useState('');
 
   const handleLogin = () => {
-    if (!registeredUser) {
-      setError('No registered user found');
-      return; // Exit the function to prevent further execution
-    }
-  
-    if (user.username === registeredUser.username && user.password === registeredUser.password) {
-      onDataExport(registeredUser, true);
-      // Handle successful login (e.g., set a session token, navigate to the authenticated part of your app)
-    } else {
-      setError('Invalid username or password');
-    }
+
   };
 
   const handleChange = (e) => {
