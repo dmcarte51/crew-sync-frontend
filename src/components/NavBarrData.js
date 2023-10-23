@@ -23,7 +23,7 @@ export const NavBarrData = [
         cName: "nav-text",
     },
     {
-        title: "Employee Availability",
+        title: "Availability",
         path: "/empavail",
         icon: <FaIcons.FaUserClock />,
         cName: "nav-text",
