@@ -31,7 +31,7 @@ function Register() {
       return;
     } else {
       try {
-        // Send a POST request to your server to create the user
+        // Send a POST request to create the user
         const response = await axios.post('http://localhost:8080/api/v1/users', JSON.stringify(formData), {
           headers: {
             'Content-Type': 'application/json'
@@ -74,13 +74,15 @@ function Register() {
           name="password"
           value={formData.password}
           onChange={handleChange}
+          minLength={8}
         />
         <input
           type="password"
           placeholder="Confirm Password"
           name="confirmPassword"
-          value={confirmPassword} // Use confirmPassword state
-          onChange={handleChange} // Use the handleChange function
+          value={confirmPassword} 
+          onChange={handleChange} 
+          minLength={8}
         />
 
         <button type="submit">Register</button>

@@ -1,6 +1,6 @@
 // EmpAvail.js
 import React from 'react';
-import styles from './EmpAvail.css';
+import './styles/EmpAvail.css';
 import { StatusDropdown, TimeDropdown} from './Dropdown';
 
 function EmpAvail() {
