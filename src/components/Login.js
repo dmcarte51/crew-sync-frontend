@@ -9,7 +9,8 @@ function Login({ onDataExport }) {
   const [error, setError] = useState('');
 
   const handleLogin = () => {
-
+    // needs to be defined after backend authentication is set up
+    // otherwise we'll set it up in the frontend
   };
 
   const handleChange = (e) => {
