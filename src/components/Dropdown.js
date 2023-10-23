@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles/Dropdown.css';
-import './EmpAvail.css';
+import './styles/EmpAvail.css';
 
 // Status Dropdown Component
 export function StatusDropdown() {

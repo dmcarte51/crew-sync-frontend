@@ -1,7 +1,7 @@
 // EmpAvail.js
 import React from 'react';
+import { StatusDropdown, TimeDropdown } from './Dropdown.js';
 import './styles/EmpAvail.css';
-import { StatusDropdown, TimeDropdown} from './Dropdown';
 
 function EmpAvail() {
     const numItems = 32;
