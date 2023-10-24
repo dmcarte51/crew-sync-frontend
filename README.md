@@ -2,6 +2,9 @@
 ### `npm install react-icons`
 ### `npm install openai`
 ### `npm install dotenv`
+### `npm install axios`
+### `pip install djangorestframework`
+### `pip install django-cors-headers`
 
 # Getting Started with Create React App
 

@@ -9,7 +9,6 @@ import Landing from './components/Landing';
 import Layout from './components/Layout';
 import Login from './components/Login';
 import Register from './components/Register';
-import Login from './components/Login';
 import Scheduler from './components/Scheduler';
 
 function App() {
