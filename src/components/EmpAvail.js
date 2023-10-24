@@ -1,10 +1,20 @@
 // EmpAvail.js
-import React from 'react';
+import { default as React, useState } from 'react';
 import { StatusDropdown, TimeDropdown } from './Dropdown.js';
 import './styles/EmpAvail.css';
 
+
 function EmpAvail() {
     const numItems = 32;
+    const [isTimeDropdownEnabled, setIsTimeDropdownEnabled] = useState(false);
+
+    const handleStatusChange = (status) => {
+      if (status === "Custom") {
+        setIsTimeDropdownEnabled(true);
+      } else {
+        setIsTimeDropdownEnabled(false);
+      }
+  }
   return (
 
      <div className="emp-avail">
@@ -20,13 +30,13 @@ function EmpAvail() {
          <div class="flex-item">Saturday</div>
          <div class="flex-item">Sunday</div>
          <div class="flex-item">Availability</div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
+         <div class="flex-item"><StatusDropdown onStatusChange={handleStatusChange} /></div>
+         <div class="flex-item"><StatusDropdown onStatusChange={handleStatusChange} /></div>
+         <div class="flex-item"><StatusDropdown onStatusChange={handleStatusChange} /></div>
+         <div class="flex-item"><StatusDropdown onStatusChange={handleStatusChange} /></div>
+         <div class="flex-item"><StatusDropdown onStatusChange={handleStatusChange} /></div>
+         <div class="flex-item"><StatusDropdown onStatusChange={handleStatusChange} /></div>
+         <div class="flex-item"><StatusDropdown onStatusChange={handleStatusChange} /></div>
          <div class="flex-item">Start</div>
          <div class="flex-item"><TimeDropdown /></div>
          <div class="flex-item"><TimeDropdown /></div>
@@ -44,7 +54,10 @@ function EmpAvail() {
          <div class="flex-item"><TimeDropdown /></div>
          <div class="flex-item"><TimeDropdown /></div>
          </div>{/* hard code */}
-
+         
+      
+      {isTimeDropdownEnabled ? <TimeDropdown /> : <TimeDropdown disabled />}
+      
       {/* <h1 className="title">Employee Availability</h1>
       <div className="flex-container">
         <FlexItem count={numItems} />
