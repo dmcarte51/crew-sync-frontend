@@ -1,5 +1,7 @@
 # COMMANDS REQUIRED FOR DEVELOPMENT (INSTALLED LIBS, PACKAGES, ETC.):
 ### `npm install react-icons`
+### `npm install openai`
+### `npm install dotenv`
 
 # Getting Started with Create React App
 
