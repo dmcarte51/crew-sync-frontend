@@ -9,6 +9,8 @@ import Landing from './components/Landing';
 import Layout from './components/Layout';
 import Login from './components/Login';
 import Register from './components/Register';
+import RegisterAxios from './components/RegisterAxios';
+
 import Scheduler from './components/Scheduler';
 import DisplayUsers from './components/DisplayUsers';
 
@@ -61,7 +63,7 @@ function App() {
             path="/reg"
             element={
               <Layout> {/* Wrap the content of each route with the Layout component */}
-                <Register />
+                <RegisterAxios />
               </Layout>
             }
           />
