@@ -22,4 +22,10 @@ export const NavBarrData = [
         icon: <AiIcons.AiFillAlert />,
         cName: "nav-text",
     },
+    {
+        title: "Availability",
+        path: "/empavail",
+        icon: <FaIcons.FaUserClock />,
+        cName: "nav-text",
+    },
 ]

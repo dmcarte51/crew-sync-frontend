@@ -1,11 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import D3Test from './components/D3Test';
 import background from './CrewSync.svg';
 import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
+import D3Test from './components/D3Test';
+import EmpAvail from './components/EmpAvail';
 import Landing from './components/Landing';
 import Layout from './components/Layout';
+import Login from './components/Login';
 import Register from './components/Register';
 import Login from './components/Login';
 import Scheduler from './components/Scheduler';
@@ -59,7 +61,7 @@ function App() {
             path="/reg"
             element={
               <Layout> {/* Wrap the content of each route with the Layout component */}
-                <Register />s
+                <Register />
               </Layout>
             }
           />
@@ -93,6 +95,13 @@ function App() {
           {empData.map((employee) => (
             <Route key={employee.name} path={`d3/${employee.name}`} element={<D3Emp empData={findByName(employee.name)} />} />
           ))}
+          <Route
+            path="/empavail"
+            element={
+              <Layout>
+                <EmpAvail empData={empData} />
+              </Layout>
+            }></Route>
         </Routes>
       </div>
     </BrowserRouter>
