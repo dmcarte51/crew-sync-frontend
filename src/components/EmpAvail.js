@@ -1,72 +1,106 @@
-// EmpAvail.js
-import React from 'react';
-import { StatusDropdown, TimeDropdown } from './Dropdown.js';
+import React, { Component } from 'react';
+import ScheduleSelector from 'react-schedule-selector';
 import './styles/EmpAvail.css';
 
-function EmpAvail() {
-    const numItems = 32;
-  return (
+class EmpAvail extends Component {
+  state = {
+    schedule: [],
+    dayAvailabilities: {
+      Monday: '',
+      Tuesday: '',
+      Wednesday: '',
+      Thursday: '',
+      Friday: '',
+      Saturday: '',
+      Sunday: '',
+    },
+  };
 
-     <div className="emp-avail">
-      {/* <div  style={{ position: 'fixed', left: 350, width: 750, height: 130, background: '#E4E4E4', border: '2px black solid'}} />      Add more content as needed */}
-      {/* <h1 className={styles.window}>Employee Availability</h1> */}
-       <div class="flex-container">
-         <div class="flex-item"></div>
-         <div class="flex-item">Monday</div>
-         <div class="flex-item">Tuesday</div>
-         <div class="flex-item">Wednesday</div>
-         <div class="flex-item">Thursday</div>
-         <div class="flex-item">Friday</div>
-         <div class="flex-item">Saturday</div>
-         <div class="flex-item">Sunday</div>
-         <div class="flex-item">Availability</div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item"><StatusDropdown /></div>
-         <div class="flex-item">Start</div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item">End</div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         <div class="flex-item"><TimeDropdown /></div>
-         </div>{/* hard code */}
+  // Define dayLabels as a class property
+  dayLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-      {/* <h1 className="title">Employee Availability</h1>
-      <div className="flex-container">
-        <FlexItem count={numItems} />
-      </div> */} {/* attempt at recursion */}
-    
-    </div>
+  handleChange = (newSchedule) => {
+    this.setState({ schedule: newSchedule }, this.generateOutput);
+  };
 
-  );
+  generateOutput = () => {
+    const { schedule, dayAvailabilities } = this.state;
+
+    this.dayLabels.forEach((day) => {
+      const dayIndex = this.dayLabels.indexOf(day);
+      const selectedDaySchedule = schedule.slice(dayIndex * 24, (dayIndex + 1) * 24);
+      const selectedTimeSlots = [];
+
+      for (let i = 0; i < 24; i++) {
+        if (selectedDaySchedule[i]) {
+          selectedTimeSlots.push(i);
+        }
+      }
+
+      if (selectedTimeSlots.length > 0) {
+        const startTime = selectedTimeSlots[0] + 8; // Adjust for your specific time range
+        const endTime = selectedTimeSlots[selectedTimeSlots.length - 1] + 9; // Adjust for your specific time range
+
+        dayAvailabilities[day] = `${day}: ${startTime}:00 - ${endTime}:00`;
+      } else {
+        dayAvailabilities[day] = `${day}: No availability`;
+      }
+    });
+
+    this.setState({ dayAvailabilities });
+  };
+
+  sendToDatabase = () => {
+    const { dayAvailabilities } = this.state;
+
+    // Send 'dayAvailabilities' to your database using an API or another method.
+    // Example using fetch:
+    fetch('your-database-endpoint', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ availability: dayAvailabilities }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  render() {
+    return (
+      <div className="emp-avail">
+        <div className="flex-container">
+          <div className="flex-item">
+            <div className="scheduler-container">
+              <ScheduleSelector
+                selection={this.state.schedule}
+                onChange={this.handleChange}
+                minTime={8}
+                maxTime={21}
+                timeFormat={"HH:mm"}
+                dateFormat={"ddd"}
+                startDate={"9-14-20"}
+                margin={1}
+                days={['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']}
+              />
+            </div>
+          </div>
+          <div className="output-container">
+            <h3>Day Availabilities:</h3>
+            {Object.keys(this.state.dayAvailabilities).map(day => (
+              <pre key={day}>{this.state.dayAvailabilities[day]}</pre>
+            ))}
+            <button onClick={this.sendToDatabase}>Send to Database</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
-
-// function FlexItem({ count }) {
-//     if (count === 0) {
-//       return null;
-//     }
-  
-//     return (
-//       <div className="flex-item">
-//         {/* Text content within the flex item */}
-//         <p>Box {count}</p>
-//         <FlexItem count={count - 1} />
-//       </div>
-//     );
-//   } w/ recursion
 
 export default EmpAvail;

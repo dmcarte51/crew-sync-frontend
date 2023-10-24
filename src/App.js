@@ -10,6 +10,7 @@ import Layout from './components/Layout';
 import Login from './components/Login';
 import Register from './components/Register';
 
+
 function App() {
   // Your employee data
   const empData =  [
