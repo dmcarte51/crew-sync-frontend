@@ -11,7 +11,7 @@ class UserView(APIView):
     serializer_class = UserSerializer
 
     def get(self, request):
-        output = [{"username": output.username, "email": output.email, "password": output.password}
+        output = [{"username": output.username, "email": output.email, "password": output.password, "availability": output.availability}
                   for output in User.objects.all()]
         return Response(output)
 
