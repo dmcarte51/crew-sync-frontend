@@ -8,6 +8,7 @@ import Landing from './components/Landing';
 import Layout from './components/Layout';
 import Register from './components/Register';
 import Login from './components/Login';
+import Scheduler from './components/Scheduler';
 
 function App() {
   // Your employee data
@@ -75,6 +76,14 @@ function App() {
             element={
               <Layout>
                 <Calendar empData={empData} dates={dates} />
+              </Layout>
+            }
+          />
+          <Route
+            path="/scheduler"
+            element={
+              <Layout>
+                <Scheduler />
               </Layout>
             }
           />
