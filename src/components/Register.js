@@ -1,6 +1,7 @@
 import "./styles/Register.css";
 import React, { useState } from 'react';
 import axios from 'axios';
+import bcrypt from 'bcryptjs'; // work on this later
 
 function Register() {
   const [formData, setFormData] = useState({

@@ -3,24 +3,31 @@ import './styles/Dropdown.css';
 import './styles/EmpAvail.css';
 
 // Status Dropdown Component
-export function StatusDropdown() {
+export function StatusDropdown({ onStatusChange }) {
   const [selectedStatus, setSelectedStatus] = useState('Select Status');
+
+  const handleChange = (e) => {
+    setSelectedStatus(e.target.value);
+    onStatusChange(e.target.value);  // This is where the callback is used
+}
 
   return (
     <div className="dropdown">
       <button className="dropbtn">{selectedStatus}</button>
       <div className="dropdown-content">
-        <select onChange={(e) => setSelectedStatus(e.target.value)}>
+        <select onChange={handleChange}>
           <option value="Open">Open</option>
           <option value="Off">Off</option>
+          <option value="Custom">Custom</option>
         </select>
       </div>
     </div>
   );
 }
 
+
 // Time Dropdown Component
-export function TimeDropdown() {
+export function TimeDropdown({ disabled }) {
   const [selectedTime, setSelectedTime] = useState('Select Time');
   const timeIncrements = [];
 
@@ -33,10 +40,10 @@ export function TimeDropdown() {
   }
 
   return (
-    <div className="dropdown">
+    <div className={`dropdown ${disabled ? 'disabled' : ''}`}>
       <button className="dropbtn">{selectedTime}</button>
       <div className="dropdown-content">
-        <select onChange={(e) => setSelectedTime(e.target.value)}>
+        <select onChange={(e) => setSelectedTime(e.target.value)} disabled={disabled}>
           {timeIncrements.map(time => (
             <option key={time} value={time}>{time}</option>
           ))}
@@ -45,3 +52,4 @@ export function TimeDropdown() {
     </div>
   );
 }
+
