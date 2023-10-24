@@ -10,6 +10,7 @@ import Layout from './components/Layout';
 import Login from './components/Login';
 import Register from './components/Register';
 import Scheduler from './components/Scheduler';
+import DisplayUsers from './components/DisplayUsers';
 
 function App() {
   // Your employee data
@@ -85,6 +86,14 @@ function App() {
             element={
               <Layout>
                 <Scheduler />
+              </Layout>
+            }
+          />
+          <Route
+            path="/display"
+            element={
+              <Layout>
+                <DisplayUsers />
               </Layout>
             }
           />

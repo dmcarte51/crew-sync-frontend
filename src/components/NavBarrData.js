@@ -28,4 +28,10 @@ export const NavBarrData = [
         icon: <FaIcons.FaUserClock />,
         cName: "nav-text",
     },
+    {
+        title: "DisplayUsers",
+        path: "/display",
+        icon: <FaIcons.FaUserClock />,
+        cName: "nav-text",
+    },
 ]
