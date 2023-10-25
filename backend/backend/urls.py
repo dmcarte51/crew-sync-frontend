@@ -15,15 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import re_path, include
+from django.urls import re_path, include, path
 from user.views import *
 from chatgpt.views import *
-from django import path
+
 
 urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path('', UserView.as_view(), name="xxx"),
     re_path('users/(?P<username>\w+)/', UserView.as_view(), name="user_operations"),
     path("chatgpt/", include("chatgpt.urls")),
-    
 ]
