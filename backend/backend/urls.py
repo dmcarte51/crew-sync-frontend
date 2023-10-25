@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import re_path, include
 from user.views import *
+from chatgpt.views import *
+from django import path
 
 urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path('', UserView.as_view(), name="xxx"),
     re_path('users/(?P<username>\w+)/', UserView.as_view(), name="user_operations"),
-    re_path("loginandregister/", include("loginandregister.urls")),
+    path("chatgpt/", include("chatgpt.urls")),
     
 ]
