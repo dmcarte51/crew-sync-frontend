@@ -22,4 +22,6 @@ urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path('', UserView.as_view(), name="xxx"),
     re_path('users/(?P<username>\w+)/', UserView.as_view(), name="user_operations"),
+    re_path("loginandregister/", include("loginandregister.urls")),
+    
 ]

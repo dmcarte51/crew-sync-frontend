@@ -22,10 +22,10 @@ class UserView(APIView):
             serializer.save()
             return Response(serializer.data)
         
-def delete(self, request, username):
-    try:
-        user = User.objects.get(username=username)
-        user.delete()
-        return Response(status=204)  # HTTP 204 No Content
-    except User.DoesNotExist:
-        return Response({"error": "User not found"}, status=404)
+    def delete(self, request, username):
+        try:
+            user = User.objects.get(username=username)
+            user.delete()
+            return Response(status=204)  # HTTP 204 No Content
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=404)
