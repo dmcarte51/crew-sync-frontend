@@ -5,7 +5,9 @@ import OpenAI from 'openai';
 
 const Scheduler = () => {
   const [response, setResponse] = useState('');
-  const apiKey = ''; // INSERT YOUR API KEY UNTIL WE GET .ENV FILE WORKING
+  const apiKey = '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'; // INSERT YOUR API KEY UNTIL WE GET .ENV FILE WORKING
+
+  console.log(response);
 
   const prompt = `Do not include pleasantries or explanations in your responses. Your responses should only contain a schedule in comma-separated format (one for each id): id,sunday_hours,monday_hours,tuesday_hours,wednesday_hours,thursday_hours,friday_hours,saturday_hours
   Can you generate a schedule based on:
