@@ -1,27 +1,35 @@
-
-.flex-container {
+/* Add your CSS styles for better presentation */
+.availability-input {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    width: 50%;  /* Adjust as needed */
-    height: 25%;
-    position: absolute;
-    top: 10%; /* Adjust as needed to position the container */
-    left: 25%;
-},
-.emp-avail {
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .checkbox-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
   }
   
-  .scheduler-container {
-    flex: 1;
-    padding-right: 20px; /* Adjust the padding as needed */
+  .checkbox-container label {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
   }
   
-  .output-container {
-    flex: 1;
+  .checkbox-container label.checked {
+    background-color: #a0e57c; /* Change the color to your preference */
+  }
+  
+  .checkbox-container input {
+    display: none; /* Hide the actual checkbox input */
+  }
+  
+  .checkbox-container label:hover {
+    background-color: #eee;
   }
   

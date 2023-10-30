@@ -1,106 +1,140 @@
-import React, { Component } from 'react';
-import ScheduleSelector from 'react-schedule-selector';
-import './styles/EmpAvail.css';
+import React, { useState } from 'react';
 
-class EmpAvail extends Component {
-  state = {
-    schedule: [],
-    dayAvailabilities: {
-      Monday: '',
-      Tuesday: '',
-      Wednesday: '',
-      Thursday: '',
-      Friday: '',
-      Saturday: '',
-      Sunday: '',
-    },
+function AvailabilityInput() {
+  const [availability, setAvailability] = useState({
+    Monday: new Array(13).fill(false),
+    Tuesday: new Array(13).fill(false),
+    Wednesday: new Array(13).fill(false),
+    Thursday: new Array(13).fill(false),
+    Friday: new Array(13).fill(false),
+    Saturday: new Array(13).fill(false),
+    Sunday: new Array(13).fill(false),
+  });
+
+  const handleCheckboxChange = (day, hourIndex) => {
+    const newAvailability = { ...availability };
+    newAvailability[day][hourIndex] = !newAvailability[day][hourIndex];
+    setAvailability(newAvailability);
   };
 
-  // Define dayLabels as a class property
-  dayLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-  handleChange = (newSchedule) => {
-    this.setState({ schedule: newSchedule }, this.generateOutput);
+  const formatTime = (start, end) => {
+    return `${start}:00 - ${end + 1}:00`;
   };
 
-  generateOutput = () => {
-    const { schedule, dayAvailabilities } = this.state;
-
-    this.dayLabels.forEach((day) => {
-      const dayIndex = this.dayLabels.indexOf(day);
-      const selectedDaySchedule = schedule.slice(dayIndex * 24, (dayIndex + 1) * 24);
-      const selectedTimeSlots = [];
-
-      for (let i = 0; i < 24; i++) {
-        if (selectedDaySchedule[i]) {
-          selectedTimeSlots.push(i);
+  const saveDataToCSV = () => {
+    // Create an array to store availability data for each day.
+    const availabilityCSV = [];
+  
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  
+    daysOfWeek.forEach((day) => {
+      const dayAvailability = availability[day];
+      let start = null;
+      let end = null;
+  
+      for (let i = 0; i < dayAvailability.length; i++) {
+        if (dayAvailability[i]) {
+          if (start === null) {
+            start = i;
+          }
+          end = i;
+        } else if (start !== null) {
+          availabilityCSV.push(`${formatTime(start + 8, end + 8)}-${formatTime(end + 8, end + 9)}`);
+          break; // Break after adding one range for the day.
         }
       }
-
-      if (selectedTimeSlots.length > 0) {
-        const startTime = selectedTimeSlots[0] + 8; // Adjust for your specific time range
-        const endTime = selectedTimeSlots[selectedTimeSlots.length - 1] + 9; // Adjust for your specific time range
-
-        dayAvailabilities[day] = `${day}: ${startTime}:00 - ${endTime}:00`;
-      } else {
-        dayAvailabilities[day] = `${day}: No availability`;
+  
+      // If no availability for the day, add "off".
+      if (start === null) {
+        availabilityCSV.push("off");
       }
     });
-
-    this.setState({ dayAvailabilities });
+  
+    // Log the CSV data for demonstration purposes.
+    console.log('CSV Data:', availabilityCSV);
   };
+  
+  
 
-  sendToDatabase = () => {
-    const { dayAvailabilities } = this.state;
-
-    // Send 'dayAvailabilities' to your database using an API or another method.
-    // Example using fetch:
-    fetch('your-database-endpoint', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ availability: dayAvailabilities }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
-
-  render() {
-    return (
-      <div className="emp-avail">
-        <div className="flex-container">
-          <div className="flex-item">
-            <div className="scheduler-container">
-              <ScheduleSelector
-                selection={this.state.schedule}
-                onChange={this.handleChange}
-                minTime={8}
-                maxTime={21}
-                timeFormat={"HH:mm"}
-                dateFormat={"ddd"}
-                startDate={"9-14-20"}
-                margin={1}
-                days={['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']}
-              />
+  return (
+    <div>
+      <h2>Availability</h2>
+      <div className="availability-input">
+        {Object.keys(availability).map((day) => (
+          <div key={day}>
+            <p>{day}:</p>
+            <div className="checkbox-container">
+              {availability[day].map((isChecked, index) => (
+                <label key={index} className={isChecked ? 'checked' : ''}>
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={() => handleCheckboxChange(day, index)}
+                  />
+                  {`${8 + index}:00`}
+                </label>
+              ))}
             </div>
           </div>
-          <div className="output-container">
-            <h3>Day Availabilities:</h3>
-            {Object.keys(this.state.dayAvailabilities).map(day => (
-              <pre key={day}>{this.state.dayAvailabilities[day]}</pre>
-            ))}
-            <button onClick={this.sendToDatabase}>Send to Database</button>
-          </div>
-        </div>
+        ))}
       </div>
-    );
-  }
+      <div className="availability-display">
+        <h3>Availability Display:</h3>
+        {Object.keys(availability).map((day) => (
+          <p key={day}>
+            {day}:
+            {availability[day].reduce(
+              (acc, isChecked, index) => {
+                if (isChecked) {
+                  if (acc.start === null) {
+                    acc.start = 8 + index;
+                    acc.end = 8 + index;
+                  } else {
+                    acc.end = 8 + index;
+                  }
+                }
+                return acc;
+              },
+              { start: null, end: null }
+            ).start !== null
+              ? formatTime(
+                  availability[day].reduce(
+                    (acc, isChecked, index) => {
+                      if (isChecked) {
+                        if (acc.start === null) {
+                          acc.start = 8 + index;
+                          acc.end = 8 + index;
+                        } else {
+                          acc.end = 8 + index;
+                        }
+                      }
+                      return acc;
+                    },
+                    { start: null, end: null }
+                  ).start,
+                  availability[day].reduce(
+                    (acc, isChecked, index) => {
+                      if (isChecked) {
+                        if (acc.start === null) {
+                          acc.start = 8 + index;
+                          acc.end = 8 + index;
+                        } else {
+                          acc.end = 8 + index;
+                        }
+                      }
+                      return acc;
+                    },
+                    { start: null, end: null }
+                  ).end
+                )
+              : 'No availability selected'
+            }
+          </p>
+        ))}
+      </div>
+      <button onClick={saveDataToCSV}>Save Availability</button>
+    </div>
+  );
 }
 
-export default EmpAvail;
+export default AvailabilityInput;
