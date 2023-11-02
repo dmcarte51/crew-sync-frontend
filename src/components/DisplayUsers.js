@@ -8,7 +8,7 @@ class App extends React.Component {
   componentDidMount() {
     
     let data;
-    axios.get('http://localhost:8000')
+    axios.get('http://localhost:8000/user/get/')
     .then(res => {
       data = res.data;
       this.setState({ 

@@ -16,12 +16,11 @@ const RegisterAxios = () => {
             username: username,
             email: email,
             password: password,
-            availability: availability
         };
 
         try {
             // Send POST request to Django backend
-            const response = await axios.post('http://localhost:8000/userview/', userData);
+            const response = await axios.post('http://localhost:8000/user/create/', userData);
             console.log('Registration successful!', response.data);
         } catch (error) {
             console.error('Error registering user:', error);
@@ -48,12 +47,6 @@ const RegisterAxios = () => {
                     placeholder="Password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Availability"
-                    value={availability}
-                    onChange={e => setAvailability(e.target.value)}
                 />
                 <button type="submit">Register</button>
             </form>

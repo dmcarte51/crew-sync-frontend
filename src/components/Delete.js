@@ -19,7 +19,7 @@ export default class Delete extends React.Component {
     }
   
     const encodedUsername = encodeURIComponent(this.state.username);
-    axios.delete(`http://localhost:8000/users/{username}`)
+    axios.delete(`http://localhost:8000/user/delete/${encodedUsername}/`)
       .then(res => {
         console.log(res);
         console.log(res.data);
