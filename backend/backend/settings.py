@@ -30,6 +30,7 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 CHATGPT = os.environ['MY_API_KEY']
+DB_PASSWORD = os.environ['DB_PASSWORD']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -88,12 +89,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# You can define your password on line 33 and the .env file
+# later on, we'll set .env to contain all of our sensitive information
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'crewsync',
         'USER': 'postgres',
-        'PASSWORD': 'password1234',
+        'PASSWORD': DB_PASSWORD, # This is the password you defined in the .env file
         'HOST': '127.0.0.1',  
         'PORT': '5432',
     }
@@ -102,12 +105,6 @@ DATABASES = {
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
