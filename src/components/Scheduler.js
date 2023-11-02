@@ -5,7 +5,7 @@ import OpenAI from 'openai';
 
 const Scheduler = () => {
   const [response, setResponse] = useState('');
-  const apiKey = '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'; // INSERT YOUR API KEY UNTIL WE GET .ENV FILE WORKING
+  const apiKey = ''; // INSERT YOUR API KEY UNTIL WE GET .ENV FILE WORKING
 
   console.log(response);
 

@@ -21,7 +21,7 @@ const RegisterAxios = () => {
 
         try {
             // Send POST request to Django backend
-            const response = await axios.post('http://localhost:8000', userData);
+            const response = await axios.post('http://localhost:8000/userview/', userData);
             console.log('Registration successful!', response.data);
         } catch (error) {
             console.error('Error registering user:', error);

@@ -22,7 +22,8 @@ from chatgpt.views import *
 
 urlpatterns = [
     re_path('admin/', admin.site.urls),
-    re_path('', UserView.as_view(), name="xxx"),
-    re_path('users/(?P<username>\w+)/', UserView.as_view(), name="user_operations"),
+    path("user/", include("user.urls")),
+    # re_path('', UserView.as_view(), name="xxx"),
+    # re_path('users/(?P<username>\w+)/', UserView.as_view(), name="user_operations"),
     path("chatgpt/", include("chatgpt.urls")),
 ]
