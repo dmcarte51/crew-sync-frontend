@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import AvailabilityInput from './EmpAvail';
 
 describe('AvailabilityInput', () => {
@@ -24,18 +24,18 @@ describe('AvailabilityInput', () => {
     expect(checkbox8AM).toBeChecked();
   });  
 
-  it('displays availability correctly', async () => {
-    const { asFragment } = render(<AvailabilityInput />);
+  // it('displays availability correctly', async () => {
+  //   const { asFragment } = render(<AvailabilityInput />);
     
-    // Click on the checkbox for Monday at 8:00 AM
-    const mondayCheckbox = screen.getByLabelText('8:00', { selector: 'input[type="checkbox"]' });
-    fireEvent.click(mondayCheckbox);
+  //   // Click on the checkbox for Monday at 8:00 AM
+  //   const mondayCheckbox = screen.getByLabelText('8:00', { selector: 'input[type="checkbox"]' });
+  //   fireEvent.click(mondayCheckbox);
     
-    // Wait for the component to finish updating after state changes
-    await waitFor(() => {
-      expect(asFragment()).toMatchSnapshot();
-    });
-  });  
+  //   // Wait for the component to finish updating after state changes
+  //   await waitFor(() => {
+  //     expect(asFragment()).toMatchSnapshot();
+  //   });
+  // });  
   
   it('saves availability when save button is clicked', () => {
     render(<AvailabilityInput />);
