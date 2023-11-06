@@ -1,5 +1,5 @@
-import "./styles/Calendar.css";
 import EmpWorkWeek from "./EmpWorkWeek";
+import "./styles/Calendar.css";
 
 function Calendar( { empData, dates } ) {
   // Create an array of day names for the week

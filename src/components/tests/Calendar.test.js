@@ -10,10 +10,6 @@ jest.mock('./EmpWorkWeek', () => {
 
 describe('Calendar', () => {
 
-    it('renders without crashing', () => {
-        render(<Calendar />);
-    });
-    
     it('renders without empData', () => {
         render(<Calendar />);
     });
