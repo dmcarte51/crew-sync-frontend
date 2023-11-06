@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import AvailabilityInput from '../EmpAvail';
+import AvailabilityInput from './EmpAvail';
 
 describe('AvailabilityInput', () => {
   it('renders the component', () => {

@@ -1,7 +1,7 @@
 import EmpWorkWeek from "./EmpWorkWeek";
 import "./styles/Calendar.css";
 
-function Calendar( { empData, dates } ) {
+function Calendar( { empData, dates = [] } ) {
   // Create an array of day names for the week
   const daysOfWeek = ['','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
