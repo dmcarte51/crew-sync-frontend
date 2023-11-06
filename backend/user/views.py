@@ -6,6 +6,12 @@ from rest_framework.response import Response
 from .serializer import *
 from rest_framework.decorators import api_view
 from rest_framework import status
+from django.contrib import messages
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+from django.core import serializers
+from django.http import JsonResponse
+from rest_framework.parsers import JSONParser
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # THIS METHOD BASICALLY DOES NOTHING
@@ -26,17 +32,28 @@ def ApiOverview(request):
 
 @api_view(['POST'])
 def add_user(request):
-    user = UserSerializer(data=request.data)
+    # Parse the incoming JSON data
+    data = JSONParser().parse(request)
 
-    # Validating for already existing data
-    if User.objects.filter(**request.data).exists():
-        return Response({'error': 'This data already exists'}, status=status.HTTP_400_BAD_REQUEST)
+    # Validate the keys in the JSON data
+    if 'username' not in data or 'password' not in data or 'email' not in data:
+        return JsonResponse({'error': 'Missing username, password, or email'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Check if the user already exists
+    if User.objects.filter(username=data['username']).exists():
+        return JsonResponse({'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Create the user
+    try:
+        user = User.objects.create_user(
+            username=data['username'],
+            password=data['password'],
+            email=data['email']
+        )
+        return JsonResponse({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    if user.is_valid():
-        user.save()
-        return Response(user.data, status=status.HTTP_201_CREATED)
-    else:
-        return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
 def get_user(request):
     # checking for the parameters from the URL
@@ -80,3 +97,26 @@ def update_user(request, pk):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def login_user(request):
+    data = JSONParser().parse(request)
+    
+    # Validate the keys in the JSON data
+    if 'username' not in data or 'password' not in data:
+        return JsonResponse({'error': 'Missing username or password'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Authenticate the user
+    user = authenticate(username=data['username'], password=data['password'])
+    
+    if user is not None:
+        # The credentials are valid, log the user in
+        login(request, user)
+        return JsonResponse({'message': 'Logged in successfully'}, status=status.HTTP_200_OK)
+    else:
+        # The credentials are invalid
+        return JsonResponse({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+def logout_user(request):
+    def post(self, request, *args, **kwargs):
+        request.auth.delete()
+        return Response(status=status.HTTP_200_OK)

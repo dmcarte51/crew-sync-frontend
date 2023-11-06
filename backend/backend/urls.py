@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.urls import re_path, include, path
 from user.views import *
 from chatgpt.views import *
-from . import views
 
 """ 
 path, and re_path is explained here https://docs.djangoproject.com/en/4.2/ref/urls/
@@ -31,7 +30,4 @@ urlpatterns = [
     # re_path('', UserView.as_view(), name="xxx"),
     # re_path('users/(?P<username>\w+)/', UserView.as_view(), name="user_operations"),
     path("chatgpt/", include("chatgpt.urls")),
-    path('login/', views.login_user, name='login'),
-    path('logout/', views.logout_user, name='logout'),
-
 ]
