@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
     "bcryptjs": "^2.4.3",
@@ -45,8 +44,12 @@
     ]
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15"
+=======
+    "@testing-library/react": "^14.0.0"
+>>>>>>> refs/remotes/origin/main
   }
 }
