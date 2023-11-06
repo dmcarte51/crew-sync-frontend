@@ -18,43 +18,43 @@ function AvailabilityInput() {
   };
 
   const formatTime = (start, end) => {
-    return `${start}:00 - ${end + 1}:00`;
+    return `${start}:00 - ${end}:00`;
   };
 
   const saveDataToCSV = () => {
     // Create an array to store availability data for each day.
     const availabilityCSV = [];
-  
+
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  
+
     daysOfWeek.forEach((day) => {
       const dayAvailability = availability[day];
       let start = null;
       let end = null;
-  
+      let hasAvailability = false;
+
       for (let i = 0; i < dayAvailability.length; i++) {
         if (dayAvailability[i]) {
           if (start === null) {
-            start = i;
+            start = i + 8;
           }
-          end = i;
+          end = i + 9;
+          hasAvailability = true;
         } else if (start !== null) {
-          availabilityCSV.push(`${formatTime(start + 8, end + 8)}-${formatTime(end + 8, end + 9)}`);
-          break; // Break after adding one range for the day.
+          availabilityCSV.push(formatTime(start, end));
+          start = null;
+          end = null;
         }
       }
-  
-      // If no availability for the day, add "off".
-      if (start === null) {
+
+      if (!hasAvailability) {
         availabilityCSV.push("off");
       }
     });
-  
+
     // Log the CSV data for demonstration purposes.
     console.log('CSV Data:', availabilityCSV);
   };
-  
-  
 
   return (
     <div>
@@ -88,9 +88,9 @@ function AvailabilityInput() {
                 if (isChecked) {
                   if (acc.start === null) {
                     acc.start = 8 + index;
-                    acc.end = 8 + index;
+                    acc.end = 8 + index + 1;
                   } else {
-                    acc.end = 8 + index;
+                    acc.end = 8 + index + 1;
                   }
                 }
                 return acc;
@@ -103,9 +103,9 @@ function AvailabilityInput() {
                       if (isChecked) {
                         if (acc.start === null) {
                           acc.start = 8 + index;
-                          acc.end = 8 + index;
+                          acc.end = 8 + index + 1;
                         } else {
-                          acc.end = 8 + index;
+                          acc.end = 8 + index + 1;
                         }
                       }
                       return acc;
@@ -117,9 +117,9 @@ function AvailabilityInput() {
                       if (isChecked) {
                         if (acc.start === null) {
                           acc.start = 8 + index;
-                          acc.end = 8 + index;
+                          acc.end = 8 + index + 1;
                         } else {
-                          acc.end = 8 + index;
+                          acc.end = 8 + index + 1;
                         }
                       }
                       return acc;
