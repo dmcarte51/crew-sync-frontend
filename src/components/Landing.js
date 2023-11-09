@@ -1,9 +1,9 @@
-import './styles/Landing.css'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Dashboard from './Dashboard';
-import Register from './Register';
 import Login from './Login';
- 
+import Register from './Register';
+import './styles/Landing.css';
+
 function Landing() {
     // sets test user (for development use only), register component will set this to the user that is registered
 

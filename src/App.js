@@ -4,16 +4,15 @@ import background from './CrewSync.svg';
 import Calendar from './components/Calendar';
 import D3Emp from './components/D3Emp';
 import D3Test from './components/D3Test';
+import Delete from './components/Delete';
 import EmpAvail from './components/EmpAvail';
 import Landing from './components/Landing';
 import Layout from './components/Layout';
 import Login from './components/Login';
-import Register from './components/Register';
-import Delete from './components/Delete';
 import RegisterAxios from './components/RegisterAxios';
 
-import Scheduler from './components/Scheduler';
 import DisplayUsers from './components/DisplayUsers';
+import Scheduler from './components/Scheduler';
 
 
 function App() {
